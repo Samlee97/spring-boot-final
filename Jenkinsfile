@@ -45,12 +45,7 @@ sh label: '', script: 'curl -u $usr:$pwd_2 --upload-file target/myWebApp_Test-0.
 
     }
 }
-/*post { 
-        success{ 
-            echo 'notified to slack'
-            slackSend baseUrl:'https://digitaldevopselite.slack.com', color: 'good', iconEmoji: '', message: 'your ${env.BUILD_NUMBER} success', username: 'Subhasanket Satapathy'
-        }
-    }*/
+
      post {
    success {
      $ curl -H "Content-Type: application/json" -X POST -d /'{"id":"${env.JOB_NAME}","bNumber":"${env.BUILD_NUMBER}","bUrl":"${env.BUILD_URL}","buildStatus":"SUCCESS"}/' SERVER
