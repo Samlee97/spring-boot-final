@@ -53,10 +53,9 @@ sh label: '', script: 'curl -u $usr:$pwd_2 --upload-file target/myWebApp_Test-0.
     }*/
      post {
    success {
-      slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-    }
+     $ curl -H "Content-Type: application/json" -X POST -d /'{"id":"${env.JOB_NAME}","bNumber":"${env.BUILD_NUMBER}","bUrl":"${env.BUILD_URL}","buildStatus":"SUCCESS"}/' SERVER
     failure {
-      slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+      $ curl -H "Content-Type: application/json" -X POST -d /'{"id":"${env.JOB_NAME}","bNumber":"${env.BUILD_NUMBER}","bUrl":"${env.BUILD_URL}","buildStatus":"FAILURE"}/' SERVER
     }
     
   }
